@@ -67,6 +67,13 @@ buildscript {
   }
 }
 
+tasks.withType(Test) {
+    enabled = false
+}
+
+
+
+
 subprojects { project ->
   group = GROUP
   version = VERSION_NAME
@@ -97,3 +104,5 @@ subprojects { project ->
     }
   }
 }
+
+

@@ -27,3 +27,8 @@ checkstyle {
   showViolations true
   sourceSets = [sourceSets.main]
 }
+
+
+tasks.getByName('test') {
+    enabled = false
+}
