@@ -1,6 +1,6 @@
 package butterknife.compiler;
 
-import android.support.annotation.Nullable;
+import javax.annotation.Nullable;
 import com.google.common.collect.ImmutableList;
 import com.google.errorprone.annotations.Immutable;
 import com.squareup.javapoet.ClassName;
@@ -59,12 +59,12 @@ final class FieldResourceBinding implements ResourceBinding {
   @Immutable
   static final class ResourceMethod implements Comparable<ResourceMethod> {
     
-    final  ClassName typeName;
+    @Nullable final  ClassName typeName;
     final String name;
     final boolean requiresResources;
     final int sdk;
 
-    ResourceMethod( ClassName typeName, String name, boolean requiresResources, int sdk) {
+    ResourceMethod( @Nullable ClassName typeName, String name, boolean requiresResources, int sdk) {
       this.typeName = typeName;
       this.name = name;
       this.requiresResources = requiresResources;
