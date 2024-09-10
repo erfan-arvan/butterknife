@@ -1,31 +1,24 @@
 package butterknife.compiler;
-
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
 import java.util.List;
-
 import static butterknife.compiler.BindingSet.UTILS;
 import static butterknife.compiler.BindingSet.requiresCast;
-
 final class FieldCollectionViewBinding {
   enum Kind {
     ARRAY("arrayFilteringNull"),
     LIST("listFilteringNull");
-
     final String factoryName;
-
     Kind(String factoryName) {
       this.factoryName = factoryName;
     }
   }
-
   final String name;
   private final TypeName type;
   private final Kind kind;
   private final boolean required;
   private final List<Id> ids;
-
   FieldCollectionViewBinding(String name, TypeName type, Kind kind, List<Id> ids,
       boolean required) {
     this.name = name;
@@ -34,7 +27,6 @@ final class FieldCollectionViewBinding {
     this.ids = ids;
     this.required = required;
   }
-
   CodeBlock render(boolean debuggable) {
     CodeBlock.Builder builder = CodeBlock.builder()
         .add("target.$L = $T.$L(", name, UTILS, kind.factoryName);
@@ -43,7 +35,6 @@ final class FieldCollectionViewBinding {
         builder.add(", ");
       }
       builder.add("\n");
-
       Id id = ids.get(i);
       boolean requiresCast = requiresCast(type);
       if (!debuggable) {

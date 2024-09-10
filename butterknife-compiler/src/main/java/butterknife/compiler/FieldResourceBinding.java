@@ -1,14 +1,11 @@
 package butterknife.compiler;
-
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import static java.util.Collections.singletonList;
 import static java.util.Collections.unmodifiableList;
-
 final class FieldResourceBinding implements ResourceBinding {
   enum Type {
     BITMAP(new ResourceMethod(BindingSet.BITMAP_FACTORY, "decodeResource", true, 1)),
@@ -31,9 +28,7 @@ final class FieldResourceBinding implements ResourceBinding {
     STRING_ARRAY("getStringArray"),
     TEXT_ARRAY("getTextArray"),
     TYPED_ARRAY("obtainTypedArray");
-
     private final List<ResourceMethod> methods;
-
     Type(ResourceMethod... methods) {
       List<ResourceMethod> methodList = new ArrayList<>(methods.length);
       Collections.addAll(methodList, methods);
@@ -41,11 +36,9 @@ final class FieldResourceBinding implements ResourceBinding {
       Collections.reverse(methodList);
       this.methods = unmodifiableList(methodList);
     }
-
     Type(String methodName) {
       methods = singletonList(new ResourceMethod(null, methodName, true, 1));
     }
-
     ResourceMethod methodForSdk(int sdk) {
       for (ResourceMethod method : methods) {
         if (method.sdk <= sdk) {
@@ -55,43 +48,35 @@ final class FieldResourceBinding implements ResourceBinding {
       throw new AssertionError();
     }
   }
-
   static final class ResourceMethod implements Comparable<ResourceMethod> {
     final ClassName typeName;
     final String name;
     final boolean requiresResources;
     final int sdk;
-
     ResourceMethod(ClassName typeName, String name, boolean requiresResources, int sdk) {
       this.typeName = typeName;
       this.name = name;
       this.requiresResources = requiresResources;
       this.sdk = sdk;
     }
-
     @Override public int compareTo(ResourceMethod other) {
       return Integer.compare(sdk, other.sdk);
     }
   }
-
   private final Id id;
   private final String name;
   private final Type type;
-
   FieldResourceBinding(Id id, String name, Type type) {
     this.id = id;
     this.name = name;
     this.type = type;
   }
-
   @Override public Id id() {
     return id;
   }
-
   @Override public boolean requiresResources(int sdk) {
     return type.methodForSdk(sdk).requiresResources;
   }
-
   @Override public CodeBlock render(int sdk) {
     ResourceMethod method = type.methodForSdk(sdk);
     if (method.typeName == null) {
