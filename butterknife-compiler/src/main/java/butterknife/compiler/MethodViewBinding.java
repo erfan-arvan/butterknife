@@ -1,7 +1,4 @@
 package butterknife.compiler;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 final class MethodViewBinding implements MemberViewBinding {
   private final String name;
   private final List<Parameter> parameters;

@@ -1,12 +1,4 @@
 package butterknife.compiler;
-import android.support.annotation.Nullable;
-import com.google.common.collect.ImmutableList;
-import com.google.errorprone.annotations.Immutable;
-import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.CodeBlock;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 final class FieldResourceBinding implements ResourceBinding {
   enum Type {
     BITMAP(new ResourceMethod(BindingSet.BITMAP_FACTORY, "decodeResource", true, 1)),
