@@ -1,5 +1,4 @@
 package butterknife.compiler;
-import com.squareup.javapoet.TypeName;
 final class Parameter {
   static final Parameter[] NONE = new Parameter[0];
   private final int listenerPosition;

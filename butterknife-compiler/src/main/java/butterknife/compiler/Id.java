@@ -1,7 +1,4 @@
 package butterknife.compiler;
-import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.CodeBlock;
-import com.sun.tools.javac.code.Symbol;
 final class Id {
   private static final ClassName ANDROID_R = ClassName.get("android", "R");
   private static final String R = "R";

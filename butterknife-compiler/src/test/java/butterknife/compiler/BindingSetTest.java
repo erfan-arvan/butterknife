@@ -1,9 +1,4 @@
 package butterknife.compiler;
-import org.junit.Test;
-import static butterknife.compiler.BindingSet.asHumanDescription;
-import static com.google.common.truth.Truth.assertThat;
-import static java.util.Arrays.asList;
-import static java.util.Collections.singletonList;
 public class BindingSetTest {
   @Test public void humanDescriptionJoinWorks() {
     MemberViewBinding one = new TestViewBinding("one");

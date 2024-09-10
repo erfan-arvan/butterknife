@@ -1,10 +1,4 @@
 package butterknife.compiler;
-import com.squareup.javapoet.CodeBlock;
-import com.squareup.javapoet.ParameterizedTypeName;
-import com.squareup.javapoet.TypeName;
-import java.util.List;
-import static butterknife.compiler.BindingSet.UTILS;
-import static butterknife.compiler.BindingSet.requiresCast;
 final class FieldCollectionViewBinding {
   enum Kind {
     ARRAY("arrayFilteringNull"),

@@ -1,11 +1,4 @@
 package butterknife.compiler;
-import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.CodeBlock;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import static java.util.Collections.singletonList;
-import static java.util.Collections.unmodifiableList;
 final class FieldResourceBinding implements ResourceBinding {
   enum Type {
     BITMAP(new ResourceMethod(BindingSet.BITMAP_FACTORY, "decodeResource", true, 1)),
