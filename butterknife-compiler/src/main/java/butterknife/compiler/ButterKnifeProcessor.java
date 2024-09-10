@@ -1,6 +1,6 @@
 package butterknife.compiler;
 @AutoService(Processor.class)
-@SuppressWarnings("NullAway") 
+ 
 public final class ButterKnifeProcessor extends AbstractProcessor {
   private static final String OPTION_SDK_INT = "butterknife.minSdk";
   private static final String OPTION_DEBUGGABLE = "butterknife.debuggable";

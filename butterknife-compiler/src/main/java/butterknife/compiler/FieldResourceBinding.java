@@ -43,7 +43,7 @@ final class FieldResourceBinding implements ResourceBinding {
   }
   @Immutable
   static final class ResourceMethod implements Comparable<ResourceMethod> {
-    @SuppressWarnings("Immutable")
+    
     final  ClassName typeName;
     final String name;
     final boolean requiresResources;
