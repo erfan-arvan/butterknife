@@ -114,7 +114,7 @@ public final class ButterKnifeProcessor extends AbstractProcessor {
   );
   private Types typeUtils;
   private Filer filer;
-  private @Nullable Trees trees;
+  private  Trees trees;
   private int sdk = 1;
   private boolean debuggable = true;
   private boolean useAndroidX = false;
@@ -752,7 +752,7 @@ public final class ButterKnifeProcessor extends AbstractProcessor {
     builder.addResource(new FieldResourceBinding(resourceId, name, requireNonNull(type)));
     erasedTargetNames.add(enclosingElement);
   }
-  private static @Nullable FieldResourceBinding.Type getArrayResourceMethodName(Element element) {
+  private static  FieldResourceBinding.Type getArrayResourceMethodName(Element element) {
     TypeMirror typeMirror = element.asType();
     if (TYPED_ARRAY_TYPE.equals(typeMirror.toString())) {
       return FieldResourceBinding.Type.TYPED_ARRAY;
@@ -770,7 +770,7 @@ public final class ButterKnifeProcessor extends AbstractProcessor {
     }
     return null;
   }
-  private static @Nullable Integer findDuplicate(int[] array) {
+  private static  Integer findDuplicate(int[] array) {
     Set<Integer> seenElements = new LinkedHashSet<>();
     for (int element : array) {
       if (!seenElements.add(element)) {
@@ -1026,7 +1026,7 @@ public final class ButterKnifeProcessor extends AbstractProcessor {
     }
     return builder;
   }
-  private @Nullable TypeElement findParentType(TypeElement typeElement, Set<TypeElement> parents) {
+  private  TypeElement findParentType(TypeElement typeElement, Set<TypeElement> parents) {
     TypeMirror type;
     while (true) {
       type = typeElement.getSuperclass();
@@ -1094,7 +1094,7 @@ public final class ButterKnifeProcessor extends AbstractProcessor {
   private static boolean isListenerRequired(ExecutableElement element) {
     return element.getAnnotation(Optional.class) == null;
   }
-  private static @Nullable AnnotationMirror getMirror(Element element,
+  private static  AnnotationMirror getMirror(Element element,
       Class<? extends Annotation> annotation) {
     for (AnnotationMirror annotationMirror : element.getAnnotationMirrors()) {
       if (annotationMirror.getAnnotationType().toString().equals(annotation.getCanonicalName())) {

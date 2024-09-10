@@ -12,7 +12,7 @@ final class Id {
   Id(int value) {
     this(value, null);
   }
-  Id(int value, @Nullable Symbol rSymbol) {
+  Id(int value,  Symbol rSymbol) {
     this.value = value;
     if (rSymbol != null) {
       ClassName className = ClassName.get(rSymbol.packge().getQualifiedName().toString(), R,

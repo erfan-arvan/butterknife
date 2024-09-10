@@ -1,0 +1,296 @@
+diff --git a/butterknife-compiler/src/main/java/butterknife/compiler/BindingSet.java b/butterknife-compiler/src/main/java/butterknife/compiler/BindingSet.java
+index e5790662..1df8168b 100644
+--- a/butterknife-compiler/src/main/java/butterknife/compiler/BindingSet.java
++++ b/butterknife-compiler/src/main/java/butterknife/compiler/BindingSet.java
+@@ -21,7 +21,6 @@ import java.util.LinkedHashMap;
+ import java.util.List;
+ import java.util.Map;
+ import java.util.Set;
+-import javax.annotation.Nullable;
+ import javax.lang.model.element.Modifier;
+ import javax.lang.model.element.TypeElement;
+ import javax.lang.model.type.TypeMirror;
+@@ -31,7 +30,6 @@ import static butterknife.compiler.ButterKnifeProcessor.VIEW_TYPE;
+ import static butterknife.compiler.ButterKnifeProcessor.isSubtypeOfType;
+ import static com.google.auto.common.MoreElements.getPackage;
+ import static java.util.Collections.singletonList;
+-import static java.util.Objects.requireNonNull;
+ import static javax.lang.model.element.Modifier.FINAL;
+ import static javax.lang.model.element.Modifier.PRIVATE;
+ import static javax.lang.model.element.Modifier.PUBLIC;
+@@ -67,11 +65,11 @@ final class BindingSet {
+   private final ImmutableList<ViewBinding> viewBindings;
+   private final ImmutableList<FieldCollectionViewBinding> collectionBindings;
+   private final ImmutableList<ResourceBinding> resourceBindings;
+-  private final @Nullable BindingSet parentBinding;
++  private final BindingSet parentBinding;
+   private BindingSet(TypeName targetTypeName, ClassName bindingClassName, boolean isFinal,
+       boolean isView, boolean isActivity, boolean isDialog, ImmutableList<ViewBinding> viewBindings,
+       ImmutableList<FieldCollectionViewBinding> collectionBindings,
+-      ImmutableList<ResourceBinding> resourceBindings, @Nullable BindingSet parentBinding) {
++      ImmutableList<ResourceBinding> resourceBindings, BindingSet parentBinding) {
+     this.isFinal = isFinal;
+     this.targetTypeName = targetTypeName;
+     this.bindingClassName = bindingClassName;
+@@ -316,7 +314,7 @@ final class BindingSet {
+   }
+   private void addViewBinding(MethodSpec.Builder result, ViewBinding binding, boolean debuggable) {
+     if (binding.isSingleFieldBinding()) {
+-      FieldViewBinding fieldBinding = requireNonNull(binding.getFieldBinding());
++      FieldViewBinding fieldBinding = binding.getFieldBinding();
+       CodeBlock.Builder builder = CodeBlock.builder()
+           .add("target.$L = ", fieldBinding.getName());
+       boolean requiresCast = requiresCast(fieldBinding.getType());
+@@ -584,7 +582,7 @@ final class BindingSet {
+   }
+   private boolean constructorNeedsView() {
+     return hasViewBindings() 
+-        || (parentBinding != null && parentBinding.constructorNeedsView());
++        || parentBinding != null && parentBinding.constructorNeedsView();
+   }
+   static boolean requiresCast(TypeName type) {
+     return !VIEW_TYPE.equals(type.toString());
+@@ -615,7 +613,7 @@ final class BindingSet {
+     private final boolean isView;
+     private final boolean isActivity;
+     private final boolean isDialog;
+-    private @Nullable BindingSet parentBinding;
++    private BindingSet parentBinding;
+     private final Map<Id, ViewBinding.Builder> viewIdMap = new LinkedHashMap<>();
+     private final ImmutableList.Builder<FieldCollectionViewBinding> collectionBindings =
+         ImmutableList.builder();
+@@ -653,7 +651,7 @@ final class BindingSet {
+     void setParent(BindingSet parent) {
+       this.parentBinding = parent;
+     }
+-    @Nullable String findExistingBindingName(Id id) {
++    String findExistingBindingName(Id id) {
+       ViewBinding.Builder builder = viewIdMap.get(id);
+       if (builder == null) {
+         return null;
+diff --git a/butterknife-compiler/src/main/java/butterknife/compiler/ButterKnifeProcessor.java b/butterknife-compiler/src/main/java/butterknife/compiler/ButterKnifeProcessor.java
+index 8e5dca77..4dc6d3f7 100644
+--- a/butterknife-compiler/src/main/java/butterknife/compiler/ButterKnifeProcessor.java
++++ b/butterknife-compiler/src/main/java/butterknife/compiler/ButterKnifeProcessor.java
+@@ -52,7 +52,6 @@ import java.util.LinkedHashSet;
+ import java.util.List;
+ import java.util.Map;
+ import java.util.Set;
+-import javax.annotation.Nullable;
+ import javax.annotation.processing.AbstractProcessor;
+ import javax.annotation.processing.Filer;
+ import javax.annotation.processing.ProcessingEnvironment;
+@@ -75,14 +74,12 @@ import javax.lang.model.util.Elements;
+ import javax.lang.model.util.Types;
+ import javax.tools.Diagnostic.Kind;
+ import static butterknife.internal.Constants.NO_RES_ID;
+-import static java.util.Objects.requireNonNull;
+ import static javax.lang.model.element.ElementKind.CLASS;
+ import static javax.lang.model.element.ElementKind.INTERFACE;
+ import static javax.lang.model.element.ElementKind.METHOD;
+ import static javax.lang.model.element.Modifier.PRIVATE;
+ import static javax.lang.model.element.Modifier.STATIC;
+ @AutoService(Processor.class)
+-@SuppressWarnings("NullAway") 
+ public final class ButterKnifeProcessor extends AbstractProcessor {
+   private static final String OPTION_SDK_INT = "butterknife.minSdk";
+   private static final String OPTION_DEBUGGABLE = "butterknife.debuggable";
+@@ -114,7 +111,7 @@ public final class ButterKnifeProcessor extends AbstractProcessor {
+   );
+   private Types typeUtils;
+   private Filer filer;
+-  private @Nullable Trees trees;
++  private Trees trees;
+   private int sdk = 1;
+   private boolean debuggable = true;
+   private boolean useAndroidX = false;
+@@ -470,10 +467,11 @@ public final class ButterKnifeProcessor extends AbstractProcessor {
+     if (hasError) {
+       return;
+     }
+-    TypeName type = TypeName.get(requireNonNull(viewType));
++    assert viewType != null; 
++    TypeName type = TypeName.get(viewType);
+     boolean required = isFieldRequired(element);
+     BindingSet.Builder builder = getOrCreateBindingBuilder(builderMap, enclosingElement);
+-    builder.addFieldCollection(new FieldCollectionViewBinding(name, type, requireNonNull(kind),
++    builder.addFieldCollection(new FieldCollectionViewBinding(name, type, kind,
+         new ArrayList<>(elementToIds(element, BindViews.class, ids).values()), required));
+     erasedTargetNames.add(enclosingElement);
+   }
+@@ -749,10 +747,10 @@ public final class ButterKnifeProcessor extends AbstractProcessor {
+     int id = element.getAnnotation(BindArray.class).value();
+     Id resourceId = elementToId(element, BindArray.class, id);
+     BindingSet.Builder builder = getOrCreateBindingBuilder(builderMap, enclosingElement);
+-    builder.addResource(new FieldResourceBinding(resourceId, name, requireNonNull(type)));
++    builder.addResource(new FieldResourceBinding(resourceId, name, type));
+     erasedTargetNames.add(enclosingElement);
+   }
+-  private static @Nullable FieldResourceBinding.Type getArrayResourceMethodName(Element element) {
++  private static FieldResourceBinding.Type getArrayResourceMethodName(Element element) {
+     TypeMirror typeMirror = element.asType();
+     if (TYPED_ARRAY_TYPE.equals(typeMirror.toString())) {
+       return FieldResourceBinding.Type.TYPED_ARRAY;
+@@ -770,7 +768,7 @@ public final class ButterKnifeProcessor extends AbstractProcessor {
+     }
+     return null;
+   }
+-  private static @Nullable Integer findDuplicate(int[] array) {
++  private static Integer findDuplicate(int[] array) {
+     Set<Integer> seenElements = new LinkedHashSet<>();
+     for (int element : array) {
+       if (!seenElements.add(element)) {
+@@ -962,10 +960,10 @@ public final class ButterKnifeProcessor extends AbstractProcessor {
+     MethodViewBinding binding = new MethodViewBinding(name, Arrays.asList(parameters), required);
+     BindingSet.Builder builder = getOrCreateBindingBuilder(builderMap, enclosingElement);
+     Map<Integer, Id> resourceIds = elementToIds(element, annotationClass, ids);
+-    for (Map.Entry<Integer, Id> entry : resourceIds.entrySet()) {
+-      if (!builder.addMethod(entry.getValue(), listener, method, binding)) {
++    for (int id : resourceIds.keySet()) {
++      if (!builder.addMethod(resourceIds.get(id), listener, method, binding)) {
+         error(element, "Multiple listener methods with return value specified for ID %d. (%s.%s)",
+-            entry.getKey(), enclosingElement.getQualifiedName(), element.getSimpleName());
++            id, enclosingElement.getQualifiedName(), element.getSimpleName());
+         return;
+       }
+     }
+@@ -1026,7 +1024,7 @@ public final class ButterKnifeProcessor extends AbstractProcessor {
+     }
+     return builder;
+   }
+-  private @Nullable TypeElement findParentType(TypeElement typeElement, Set<TypeElement> parents) {
++  private TypeElement findParentType(TypeElement typeElement, Set<TypeElement> parents) {
+     TypeMirror type;
+     while (true) {
+       type = typeElement.getSuperclass();
+@@ -1094,7 +1092,7 @@ public final class ButterKnifeProcessor extends AbstractProcessor {
+   private static boolean isListenerRequired(ExecutableElement element) {
+     return element.getAnnotation(Optional.class) == null;
+   }
+-  private static @Nullable AnnotationMirror getMirror(Element element,
++  private static AnnotationMirror getMirror(Element element,
+       Class<? extends Annotation> annotation) {
+     for (AnnotationMirror annotationMirror : element.getAnnotationMirrors()) {
+       if (annotationMirror.getAnnotationType().toString().equals(annotation.getCanonicalName())) {
+@@ -1118,7 +1116,7 @@ public final class ButterKnifeProcessor extends AbstractProcessor {
+           && symbol.getEnclosingElement().getEnclosingElement() != null
+           && symbol.getEnclosingElement().getEnclosingElement().enclClass() != null) {
+         try {
+-          int value = (Integer) requireNonNull(((Symbol.VarSymbol) symbol).getConstantValue());
++          int value = (Integer) ((Symbol.VarSymbol) symbol).getConstantValue();
+           resourceIds.put(value, new Id(value, symbol));
+         } catch (Exception ignored) { }
+       }
+diff --git a/butterknife-compiler/src/main/java/butterknife/compiler/FieldResourceBinding.java b/butterknife-compiler/src/main/java/butterknife/compiler/FieldResourceBinding.java
+index 69658997..825f69d6 100644
+--- a/butterknife-compiler/src/main/java/butterknife/compiler/FieldResourceBinding.java
++++ b/butterknife-compiler/src/main/java/butterknife/compiler/FieldResourceBinding.java
+@@ -1,12 +1,11 @@
+ package butterknife.compiler;
+-import android.support.annotation.Nullable;
+-import com.google.common.collect.ImmutableList;
+-import com.google.errorprone.annotations.Immutable;
+ import com.squareup.javapoet.ClassName;
+ import com.squareup.javapoet.CodeBlock;
+ import java.util.ArrayList;
+ import java.util.Collections;
+ import java.util.List;
++import static java.util.Collections.singletonList;
++import static java.util.Collections.unmodifiableList;
+ final class FieldResourceBinding implements ResourceBinding {
+   enum Type {
+     BITMAP(new ResourceMethod(BindingSet.BITMAP_FACTORY, "decodeResource", true, 1)),
+@@ -29,16 +28,16 @@ final class FieldResourceBinding implements ResourceBinding {
+     STRING_ARRAY("getStringArray"),
+     TEXT_ARRAY("getTextArray"),
+     TYPED_ARRAY("obtainTypedArray");
+-    private final ImmutableList<ResourceMethod> methods;
++    private final List<ResourceMethod> methods;
+     Type(ResourceMethod... methods) {
+       List<ResourceMethod> methodList = new ArrayList<>(methods.length);
+       Collections.addAll(methodList, methods);
+       Collections.sort(methodList);
+       Collections.reverse(methodList);
+-      this.methods = ImmutableList.copyOf(methodList);
++      this.methods = unmodifiableList(methodList);
+     }
+     Type(String methodName) {
+-      methods = ImmutableList.of(new ResourceMethod(null, methodName, true, 1));
++      methods = singletonList(new ResourceMethod(null, methodName, true, 1));
+     }
+     ResourceMethod methodForSdk(int sdk) {
+       for (ResourceMethod method : methods) {
+@@ -49,14 +48,12 @@ final class FieldResourceBinding implements ResourceBinding {
+       throw new AssertionError();
+     }
+   }
+-  @Immutable
+   static final class ResourceMethod implements Comparable<ResourceMethod> {
+-    @SuppressWarnings("Immutable")
+-    final @Nullable ClassName typeName;
++    final ClassName typeName;
+     final String name;
+     final boolean requiresResources;
+     final int sdk;
+-    ResourceMethod(@Nullable ClassName typeName, String name, boolean requiresResources, int sdk) {
++    ResourceMethod(ClassName typeName, String name, boolean requiresResources, int sdk) {
+       this.typeName = typeName;
+       this.name = name;
+       this.requiresResources = requiresResources;
+diff --git a/butterknife-compiler/src/main/java/butterknife/compiler/Id.java b/butterknife-compiler/src/main/java/butterknife/compiler/Id.java
+index f9120150..9aa49223 100644
+--- a/butterknife-compiler/src/main/java/butterknife/compiler/Id.java
++++ b/butterknife-compiler/src/main/java/butterknife/compiler/Id.java
+@@ -1,5 +1,4 @@
+ package butterknife.compiler;
+-import android.support.annotation.Nullable;
+ import com.squareup.javapoet.ClassName;
+ import com.squareup.javapoet.CodeBlock;
+ import com.sun.tools.javac.code.Symbol;
+@@ -12,7 +11,7 @@ final class Id {
+   Id(int value) {
+     this(value, null);
+   }
+-  Id(int value, @Nullable Symbol rSymbol) {
++  Id(int value, Symbol rSymbol) {
+     this.value = value;
+     if (rSymbol != null) {
+       ClassName className = ClassName.get(rSymbol.packge().getQualifiedName().toString(), R,
+diff --git a/butterknife-compiler/src/main/java/butterknife/compiler/ViewBinding.java b/butterknife-compiler/src/main/java/butterknife/compiler/ViewBinding.java
+index 2c34db98..3652be43 100644
+--- a/butterknife-compiler/src/main/java/butterknife/compiler/ViewBinding.java
++++ b/butterknife-compiler/src/main/java/butterknife/compiler/ViewBinding.java
+@@ -7,13 +7,12 @@ import java.util.LinkedHashSet;
+ import java.util.List;
+ import java.util.Map;
+ import java.util.Set;
+-import javax.annotation.Nullable;
+ final class ViewBinding {
+   private final Id id;
+   private final Map<ListenerClass, Map<ListenerMethod, Set<MethodViewBinding>>> methodBindings;
+-  private final @Nullable FieldViewBinding fieldBinding;
++  private final FieldViewBinding fieldBinding;
+   ViewBinding(Id id, Map<ListenerClass, Map<ListenerMethod, Set<MethodViewBinding>>> methodBindings,
+-      @Nullable FieldViewBinding fieldBinding) {
++      FieldViewBinding fieldBinding) {
+     this.id = id;
+     this.methodBindings = methodBindings;
+     this.fieldBinding = fieldBinding;
+@@ -21,7 +20,7 @@ final class ViewBinding {
+   public Id getId() {
+     return id;
+   }
+-  public @Nullable FieldViewBinding getFieldBinding() {
++  public FieldViewBinding getFieldBinding() {
+     return fieldBinding;
+   }
+   public Map<ListenerClass, Map<ListenerMethod, Set<MethodViewBinding>>> getMethodBindings() {
+@@ -62,7 +61,7 @@ final class ViewBinding {
+     private final Id id;
+     private final Map<ListenerClass, Map<ListenerMethod, Set<MethodViewBinding>>> methodBindings =
+         new LinkedHashMap<>();
+-    @Nullable FieldViewBinding fieldBinding;
++    FieldViewBinding fieldBinding;
+     Builder(Id id) {
+       this.id = id;
+     }

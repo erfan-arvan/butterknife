@@ -11,9 +11,9 @@ import javax.annotation.Nullable;
 final class ViewBinding {
   private final Id id;
   private final Map<ListenerClass, Map<ListenerMethod, Set<MethodViewBinding>>> methodBindings;
-  private final @Nullable FieldViewBinding fieldBinding;
+  private final  FieldViewBinding fieldBinding;
   ViewBinding(Id id, Map<ListenerClass, Map<ListenerMethod, Set<MethodViewBinding>>> methodBindings,
-      @Nullable FieldViewBinding fieldBinding) {
+       FieldViewBinding fieldBinding) {
     this.id = id;
     this.methodBindings = methodBindings;
     this.fieldBinding = fieldBinding;
@@ -21,7 +21,7 @@ final class ViewBinding {
   public Id getId() {
     return id;
   }
-  public @Nullable FieldViewBinding getFieldBinding() {
+  public  FieldViewBinding getFieldBinding() {
     return fieldBinding;
   }
   public Map<ListenerClass, Map<ListenerMethod, Set<MethodViewBinding>>> getMethodBindings() {
@@ -62,7 +62,7 @@ final class ViewBinding {
     private final Id id;
     private final Map<ListenerClass, Map<ListenerMethod, Set<MethodViewBinding>>> methodBindings =
         new LinkedHashMap<>();
-    @Nullable FieldViewBinding fieldBinding;
+     FieldViewBinding fieldBinding;
     Builder(Id id) {
       this.id = id;
     }
