@@ -1,10 +1,5 @@
 package butterknife.lint;
-
-import com.android.tools.lint.checks.infrastructure.TestFile;
-import org.junit.Test;
-
-import static com.android.tools.lint.checks.infrastructure.TestFiles.java;
-import static com.android.tools.lint.checks.infrastructure.TestLintTask.lint;
+import javax.annotation.Nullable;import static com.android.tools.lint.checks.infrastructure.TestLintTask.lint;
 
 public final class InvalidR2UsageDetectorTest {
   private static final TestFile BIND_TEST = java(""

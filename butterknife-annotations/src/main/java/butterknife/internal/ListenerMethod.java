@@ -1,10 +1,5 @@
 package butterknife.internal;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import javax.annotation.Nullable;import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Retention(RUNTIME) @Target(FIELD)
 public @interface ListenerMethod {

@@ -1,10 +1,5 @@
 package butterknife;
-
-import android.graphics.Typeface;
-import android.support.annotation.FontRes;
-import android.support.annotation.IntDef;
-import android.support.annotation.RestrictTo;
-import java.lang.annotation.Retention;
+import javax.annotation.Nullable;import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import static android.support.annotation.RestrictTo.Scope.LIBRARY;

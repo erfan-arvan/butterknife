@@ -1,7 +1,3 @@
-# Run this script in the root directory of your project where the src directory exists.
-# This script removes all @Nullable, @NonNull, and their variations.
-# Use the remove_suppress_warnings flag to remove all @SuppressWarnings annotations.
-
 import os
 import re
 import argparse
@@ -22,7 +18,7 @@ def remove_annotations(file_path, remove_suppress_warnings):
         content = file.read()
     
     # Regex patterns
-    nullable_pattern = r'@\bNullable\b'
+    nullable_pattern = r'@\bNullable\b(?:\(\))?'  # Updated to match both @Nullable and @Nullable()
     nonnull_pattern = r'@\bNonNull\b'
     nonnull_strict_pattern = r'@\bNonnull\b'
     notnull_pattern = r'@\bNotnull\b'
@@ -51,7 +47,7 @@ def remove_annotations(file_path, remove_suppress_warnings):
     if nullable_matches or nonnull_matches or nonnull_strict_matches or notnull_matches or not_null_strict_matches or monotonic_nonnull_matches or (remove_suppress_warnings and suppress_warnings_matches):
         print(f'Found in {file_path}:')
         if nullable_matches:
-            print(f'  @Nullable: {len(nullable_matches)} occurrences')
+            print(f'  @Nullable/@Nullable(): {len(nullable_matches)} occurrences')  # Updated for @Nullable()
         if nonnull_matches:
             print(f'  @NonNull: {len(nonnull_matches)} occurrences')
         if nonnull_strict_matches:
@@ -66,7 +62,7 @@ def remove_annotations(file_path, remove_suppress_warnings):
             print(f'  @SuppressWarnings: {len(suppress_warnings_matches)} occurrences')
     
     # Remove annotations without affecting code
-    new_content = re.sub(nullable_pattern, '', content)
+    new_content = re.sub(nullable_pattern, '', content)  # Updated to remove both @Nullable and @Nullable()
     new_content = re.sub(nonnull_pattern, '', new_content)
     new_content = re.sub(nonnull_strict_pattern, '', new_content)
     new_content = re.sub(notnull_pattern, '', new_content)
@@ -97,7 +93,7 @@ if __name__ == "__main__":
     
     # Print total counts
     print("\nTotal occurrences removed:")
-    print(f'  @Nullable: {total_nullable_count}')
+    print(f'  @Nullable/@Nullable(): {total_nullable_count}')  # Updated for @Nullable()
     print(f'  @NonNull: {total_nonnull_count}')
     print(f'  @Nonnull: {total_nonnull_strict_count}')
     print(f'  @Notnull: {total_notnull_count}')

@@ -1,10 +1,5 @@
 package com.example.butterknife.unbinder;
-
-import android.support.annotation.ColorInt;
-import android.view.View;
-
-import butterknife.BindColor;
-import butterknife.ButterKnife;
+import javax.annotation.Nullable;import butterknife.ButterKnife;
 
 public final class F extends D {
 

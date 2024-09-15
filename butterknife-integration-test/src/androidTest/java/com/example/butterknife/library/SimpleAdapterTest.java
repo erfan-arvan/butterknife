@@ -1,10 +1,5 @@
 package com.example.butterknife.library;
-
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.view.View;
-import com.example.butterknife.R;
-import org.junit.Test;
+import javax.annotation.Nullable;import org.junit.Test;
 
 import static com.example.butterknife.library.SimpleAdapter.ViewHolder;
 import static com.google.common.truth.Truth.assertThat;

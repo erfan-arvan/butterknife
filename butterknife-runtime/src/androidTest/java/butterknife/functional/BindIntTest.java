@@ -1,10 +1,5 @@
 package butterknife.functional;
-
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import butterknife.BindInt;
-import butterknife.Unbinder;
-import butterknife.runtime.test.R;
+import javax.annotation.Nullable;import butterknife.runtime.test.R;
 import org.junit.Test;
 
 import static com.google.common.truth.Truth.assertThat;

@@ -1,11 +1,6 @@
 // Generated code from Butter Knife gradle plugin. Do not modify!
 package com.butterknife.example;
-
-import android.support.annotation.AnimRes;
-import android.support.annotation.ArrayRes;
-import android.support.annotation.AttrRes;
-import android.support.annotation.BoolRes;
-import android.support.annotation.ColorRes;
+import javax.annotation.Nullable;import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;

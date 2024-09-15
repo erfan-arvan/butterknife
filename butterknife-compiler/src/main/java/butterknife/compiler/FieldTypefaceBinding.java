@@ -1,11 +1,5 @@
 package butterknife.compiler;
-
-import android.support.annotation.Nullable;
-import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.CodeBlock;
-
-final class FieldTypefaceBinding implements ResourceBinding {
-  private static final ClassName RESOURCES_COMPAT =
+import javax.annotation.Nullable;  private static final ClassName RESOURCES_COMPAT =
       ClassName.get("android.support.v4.content.res", "ResourcesCompat");
   private static final ClassName RESOURCES_COMPAT_ANDROIDX =
       ClassName.get("androidx.core.content.res", "ResourcesCompat");

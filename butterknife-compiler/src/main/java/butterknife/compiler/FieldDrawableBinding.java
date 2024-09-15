@@ -1,10 +1,5 @@
 package butterknife.compiler;
-
-import com.squareup.javapoet.CodeBlock;
-
-import static butterknife.compiler.BindingSet.CONTEXT_COMPAT;
-import static butterknife.compiler.BindingSet.CONTEXT_COMPAT_ANDROIDX;
-import static butterknife.compiler.BindingSet.UTILS;
+import javax.annotation.Nullable;import static butterknife.compiler.BindingSet.UTILS;
 import static butterknife.internal.Constants.NO_RES_ID;
 
 final class FieldDrawableBinding implements ResourceBinding {

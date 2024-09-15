@@ -1,10 +1,5 @@
 package butterknife;
-
-import butterknife.internal.Utils;
-import org.junit.Test;
-
-import static butterknife.internal.Utils.arrayFilteringNull;
-import static butterknife.internal.Utils.listFilteringNull;
+import javax.annotation.Nullable;import static butterknife.internal.Utils.listFilteringNull;
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.fail;
 

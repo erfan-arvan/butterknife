@@ -1,10 +1,5 @@
 package butterknife.compiler;
-
-import butterknife.OnTouch;
-import butterknife.internal.ListenerClass;
-import butterknife.internal.ListenerMethod;
-import com.google.common.collect.ImmutableList;
-import com.squareup.javapoet.AnnotationSpec;
+import javax.annotation.Nullable;import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.JavaFile;
@@ -22,7 +17,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.annotation.Nullable;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;

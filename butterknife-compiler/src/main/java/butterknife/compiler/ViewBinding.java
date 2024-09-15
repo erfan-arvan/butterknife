@@ -1,14 +1,8 @@
 package butterknife.compiler;
-
-import butterknife.internal.ListenerClass;
-import butterknife.internal.ListenerMethod;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
+import javax.annotation.Nullable;import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.annotation.Nullable;
 
 final class ViewBinding {
   private final Id id;

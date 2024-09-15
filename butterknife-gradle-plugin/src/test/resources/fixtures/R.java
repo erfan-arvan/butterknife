@@ -1,10 +1,5 @@
 package com.example.butterknife;
-
-public final class R {
-  public static final class unsupported {
-    public static int res = 0x7f040000;
-  }
-
+import javax.annotation.Nullable;
   public static final class anim {
     public static int res = 0x7f040001;
   }

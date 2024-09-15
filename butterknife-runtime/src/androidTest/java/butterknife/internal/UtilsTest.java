@@ -1,10 +1,5 @@
 package butterknife.internal;
-
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.view.View;
-import org.junit.Test;
-
+import javax.annotation.Nullable;
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.fail;
 

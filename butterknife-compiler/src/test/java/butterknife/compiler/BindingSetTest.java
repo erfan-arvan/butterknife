@@ -1,10 +1,5 @@
 package butterknife.compiler;
-
-import org.junit.Test;
-
-import static butterknife.compiler.BindingSet.asHumanDescription;
-import static com.google.common.truth.Truth.assertThat;
-import static java.util.Arrays.asList;
+import javax.annotation.Nullable;import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
 public class BindingSetTest {

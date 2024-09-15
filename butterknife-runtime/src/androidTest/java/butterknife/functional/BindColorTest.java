@@ -1,10 +1,5 @@
 package butterknife.functional;
-
-import android.content.Context;
-import android.content.res.ColorStateList;
-import android.support.test.InstrumentationRegistry;
-import butterknife.BindColor;
-import butterknife.Unbinder;
+import javax.annotation.Nullable;import butterknife.Unbinder;
 import butterknife.runtime.test.R;
 import org.junit.Test;
 

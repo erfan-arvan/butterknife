@@ -1,5 +1,7 @@
 package butterknife.compiler;
 
+import javax.annotation.Nullable;
+
 /**
  * A field or method view binding.
  */

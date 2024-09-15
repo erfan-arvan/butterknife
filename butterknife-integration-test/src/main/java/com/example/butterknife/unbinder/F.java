@@ -1,10 +1,5 @@
 package com.example.butterknife.unbinder;
-
-import android.support.annotation.ColorInt;
-import android.view.View;
-import butterknife.BindColor;
-import butterknife.ButterKnife;
-
+import javax.annotation.Nullable;
 public final class F extends D {
 
   @BindColor(android.R.color.background_light) @ColorInt int backgroundLightColor;

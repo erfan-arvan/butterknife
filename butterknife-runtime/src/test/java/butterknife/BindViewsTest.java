@@ -1,10 +1,5 @@
 package butterknife;
-
-import butterknife.compiler.ButterKnifeProcessor;
-
-import com.google.common.collect.ImmutableList;
-import com.google.testing.compile.JavaFileObjects;
-import javax.tools.JavaFileObject;
+import javax.annotation.Nullable;import javax.tools.JavaFileObject;
 import javax.tools.StandardLocation;
 import org.junit.Test;
 

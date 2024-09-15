@@ -1,11 +1,5 @@
 package butterknife.compiler;
-
-import android.support.annotation.Nullable;
-import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.CodeBlock;
-import com.sun.tools.javac.code.Symbol;
-
-/**
+import javax.annotation.Nullable;/**
  * Represents an ID of an Android resource.
  */
 final class Id {

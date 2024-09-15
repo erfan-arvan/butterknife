@@ -1,10 +1,5 @@
 package butterknife.compiler;
-
-import butterknife.BindAnim;
-import butterknife.BindArray;
-import butterknife.BindBitmap;
-import butterknife.BindBool;
-import butterknife.BindColor;
+import javax.annotation.Nullable;import butterknife.BindColor;
 import butterknife.BindDimen;
 import butterknife.BindDrawable;
 import butterknife.BindFloat;
@@ -53,7 +48,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.annotation.Nullable;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.ProcessingEnvironment;

@@ -1,10 +1,5 @@
 package butterknife.lint;
-
-import com.android.tools.lint.client.api.IssueRegistry;
-import com.android.tools.lint.detector.api.ApiKt;
-import com.android.tools.lint.detector.api.Issue;
-import com.google.common.collect.ImmutableList;
-import java.util.List;
+import javax.annotation.Nullable;import java.util.List;
 
 /**
  * Contains references to all custom lint checks for butterknife.

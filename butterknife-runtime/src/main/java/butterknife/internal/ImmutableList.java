@@ -1,10 +1,5 @@
 package butterknife.internal;
-
-import java.util.AbstractList;
-import java.util.RandomAccess;
-
-/**
- * An immutable list of views which is lighter than {@code
+import javax.annotation.Nullable; * An immutable list of views which is lighter than {@code
  * Collections.unmodifiableList(new ArrayList<>(Arrays.asList(foo, bar)))}.
  */
 final class ImmutableList<T> extends AbstractList<T> implements RandomAccess {

@@ -1,10 +1,5 @@
 package com.example.butterknife.library;
-
-import android.support.test.rule.ActivityTestRule;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-import com.example.butterknife.R;
-import org.junit.Rule;
+import javax.annotation.Nullable;import org.junit.Rule;
 import org.junit.Test;
 
 import static com.google.common.truth.Truth.assertThat;
