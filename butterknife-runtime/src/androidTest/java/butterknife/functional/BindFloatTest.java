@@ -1,9 +1,5 @@
 package butterknife.functional;
-
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.util.TypedValue;
-import butterknife.BindFloat;
+import javax.annotation.Nullable;import butterknife.BindFloat;
 import butterknife.Unbinder;
 import butterknife.runtime.test.R;
 import org.junit.Test;

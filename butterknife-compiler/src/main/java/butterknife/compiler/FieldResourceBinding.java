@@ -1,9 +1,5 @@
 package butterknife.compiler;
-
-import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.CodeBlock;
-import java.util.ArrayList;
-import java.util.Collections;
+import javax.annotation.Nullable;import java.util.Collections;
 import java.util.List;
 
 import static java.util.Collections.singletonList;

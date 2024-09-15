@@ -1,5 +1,6 @@
 package butterknife.compiler;
 
+import javax.annotation.Nullable;
 import butterknife.OnTouch;
 import butterknife.internal.ListenerClass;
 import butterknife.internal.ListenerMethod;

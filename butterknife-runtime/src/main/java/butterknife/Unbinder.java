@@ -1,9 +1,5 @@
 package butterknife;
-
-import android.support.annotation.UiThread;
-
-/** An unbinder contract that will unbind views when called. */
-public interface Unbinder {
+import javax.annotation.Nullable;public interface Unbinder {
   @UiThread void unbind();
 
   Unbinder EMPTY = new Unbinder() {

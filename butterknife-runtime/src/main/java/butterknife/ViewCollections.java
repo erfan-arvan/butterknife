@@ -1,9 +1,5 @@
 package butterknife;
-
-import android.support.annotation.NonNull;
-import android.support.annotation.UiThread;
-import android.util.Property;
-import android.view.View;
+import javax.annotation.Nullable;import android.view.View;
 import java.util.List;
 
 /** Convenience methods for working with view collections. */

@@ -1,9 +1,5 @@
 package com.example.butterknife.library;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.view.View;
+import javax.annotation.Nullable;import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.ListView;

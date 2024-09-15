@@ -1,9 +1,5 @@
 package butterknife.test;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.TextView;
-import butterknife.ButterKnife;
+import javax.annotation.Nullable;import butterknife.ButterKnife;
 import butterknife.BindView;
 import com.example.butterknife.R;
 import com.example.butterknife.R2;

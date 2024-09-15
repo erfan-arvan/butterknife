@@ -1,9 +1,5 @@
 package butterknife.compiler;
-
-import butterknife.OnTouch;
-import butterknife.internal.ListenerClass;
-import butterknife.internal.ListenerMethod;
-import com.google.common.collect.ImmutableList;
+import javax.annotation.Nullable;import com.google.common.collect.ImmutableList;
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;

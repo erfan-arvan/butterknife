@@ -1,9 +1,5 @@
 package com.example.butterknife;
-
-public final class R {
-  public static final class anim {
-    public static final int res = 0x7f040001;
-  }
+import javax.annotation.Nullable;  }
 
   public static final class array {
     public static final int res = 0x7f040002;

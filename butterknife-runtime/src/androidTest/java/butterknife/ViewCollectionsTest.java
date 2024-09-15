@@ -1,9 +1,5 @@
 package butterknife;
-
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.test.InstrumentationRegistry;
-import android.util.Property;
+import javax.annotation.Nullable;import android.util.Property;
 import android.view.View;
 import java.util.List;
 import org.junit.Test;

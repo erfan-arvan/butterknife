@@ -1,9 +1,5 @@
 package butterknife;
-
-import android.view.View;
-import java.util.List;
-
-final class ListenerUnbinder<T extends View> implements Unbinder {
+import javax.annotation.Nullable;final class ListenerUnbinder<T extends View> implements Unbinder {
   private final List<T> targets;
   private final Setter<T, ?> setter;
 

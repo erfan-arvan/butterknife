@@ -1,9 +1,5 @@
 package butterknife.compiler;
-
-import com.squareup.javapoet.TypeName;
-
-/** Represents a parameter type and its position in the listener method. */
-final class Parameter {
+import javax.annotation.Nullable;final class Parameter {
   static final Parameter[] NONE = new Parameter[0];
 
   private final int listenerPosition;

@@ -1,9 +1,5 @@
 package com.example.butterknife.library;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
+import javax.annotation.Nullable;import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;

@@ -1,5 +1,6 @@
 package butterknife.compiler;
 
+import javax.annotation.Nullable;
 import butterknife.BindAnim;
 import butterknife.BindArray;
 import butterknife.BindBitmap;
@@ -115,7 +116,10 @@ public final class ButterKnifeProcessor extends AbstractProcessor {
 
     private static final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String LIST_TYPE = List.class.getCanonicalName();
 
-    private static final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull List<Class<? extends Annotation>> LISTENERS = //
+    private static final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull List<Class<? extends Annotation>> //
+    //
+    //
+    LISTENERS = //
     Arrays.//
     asList(//
     OnCheckedChanged.class, //
@@ -126,9 +130,7 @@ public final class ButterKnifeProcessor extends AbstractProcessor {
     OnItemLongClick.class, //
     OnItemSelected.class, //
     OnLongClick.class, //
-    OnPageChange.class, //
-    OnTextChanged.class, //
-    OnTouch.class);
+    OnPageChange.class, OnTextChanged.class, OnTouch.class);
 
     private @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.MonotonicNonNull Types typeUtils;
 

@@ -1,9 +1,5 @@
 package butterknife;
-
-import com.google.common.base.Joiner;
-import com.google.common.collect.ImmutableSet;
-import com.google.testing.compile.JavaFileObjects;
-
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Set;

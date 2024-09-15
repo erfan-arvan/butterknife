@@ -1,9 +1,5 @@
 package com.example.butterknife.unbinder;
-
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.view.View;
-import android.widget.Button;
+import javax.annotation.Nullable;import android.widget.Button;
 import android.widget.FrameLayout;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

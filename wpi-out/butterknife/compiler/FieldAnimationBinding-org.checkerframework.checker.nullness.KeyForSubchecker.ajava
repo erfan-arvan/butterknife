@@ -1,5 +1,6 @@
 package butterknife.compiler;
 
+import javax.annotation.Nullable;
 import com.squareup.javapoet.CodeBlock;
 import static butterknife.compiler.BindingSet.ANIMATION_UTILS;
 

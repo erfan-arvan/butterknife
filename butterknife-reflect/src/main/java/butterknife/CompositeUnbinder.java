@@ -1,9 +1,5 @@
 package butterknife;
-
-import java.util.List;
-
-final class CompositeUnbinder implements Unbinder {
-  private List<Unbinder> unbinders;
+import javax.annotation.Nullable;  private List<Unbinder> unbinders;
 
   CompositeUnbinder(List<Unbinder> unbinders) {
     this.unbinders = unbinders;

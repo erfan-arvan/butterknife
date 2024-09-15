@@ -1,9 +1,5 @@
 package butterknife.compiler;
-
-import com.squareup.javapoet.CodeBlock;
-
-import static butterknife.compiler.BindingSet.ANIMATION_UTILS;
-
+import javax.annotation.Nullable;
 final class FieldAnimationBinding implements ResourceBinding {
   private final Id id;
   private final String name;

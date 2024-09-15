@@ -1,9 +1,5 @@
 package butterknife.compiler;
-
-import butterknife.BindAnim;
-import butterknife.BindArray;
-import butterknife.BindBitmap;
-import butterknife.BindBool;
+import javax.annotation.Nullable;import butterknife.BindBool;
 import butterknife.BindColor;
 import butterknife.BindDimen;
 import butterknife.BindDrawable;

@@ -1,9 +1,5 @@
 package butterknife;
-
-import android.support.annotation.IdRes;
-import android.view.View;
-import butterknife.internal.ListenerClass;
-import butterknife.internal.ListenerMethod;
+import javax.annotation.Nullable;import butterknife.internal.ListenerMethod;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 

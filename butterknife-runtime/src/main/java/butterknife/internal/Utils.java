@@ -1,9 +1,5 @@
 package butterknife.internal;
-
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.AttrRes;
+import javax.annotation.Nullable;import android.support.annotation.AttrRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;

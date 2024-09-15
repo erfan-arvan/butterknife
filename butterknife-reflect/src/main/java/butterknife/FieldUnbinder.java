@@ -1,9 +1,5 @@
 package butterknife;
-
-import java.lang.reflect.Field;
-
-import static butterknife.ButterKnife.trySet;
-
+import javax.annotation.Nullable;
 final class FieldUnbinder implements Unbinder {
   private final Object target;
   private final Field field;
