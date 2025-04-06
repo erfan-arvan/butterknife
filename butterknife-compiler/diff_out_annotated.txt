@@ -16,7 +16,7 @@ index 7bd2f3cd..45f9e55c 100644
    }
    private boolean constructorNeedsView() {
      return hasViewBindings() 
-//Other: Added parentheses to clarify logical expression precedence
+//Others: Added parentheses to clarify logical expression precedence
 -        || parentBinding != null && parentBinding.constructorNeedsView();
 +        || (parentBinding != null && parentBinding.constructorNeedsView());
    }
@@ -101,7 +101,7 @@ index d05a82e3..fc923071 100644
        Collections.addAll(methodList, methods);
        Collections.sort(methodList);
        Collections.reverse(methodList);
-//Other: Immutable collection usage
+//Others: Immutable collection usage
 -      this.methods = unmodifiableList(methodList);
 +      this.methods = ImmutableList.copyOf(methodList);
      }
